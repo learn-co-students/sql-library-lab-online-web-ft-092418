@@ -1,24 +1,27 @@
 def select_books_titles_and_years_in_first_series_order_by_year
-  "Write your SQL query here"
+  "SELECT TITLE , YEAR FROM BOOKS  WHERE SERIES_ID = 1 ORDER BY YEAR ;"
 end
 
 def select_name_and_motto_of_char_with_longest_motto
-  "Write your SQL query here"
+  "SELECT NAME , MOTTO FROM CHARACTERS WHERE LENGTH(MOTTO)=(SELECT MAX(LENGTH(MOTTO)) FROM CHARACTERS)"
 end
 
 
 def select_value_and_count_of_most_prolific_species
-  "Write your SQL query here"
+  "SELECT SPECIES , COUNT(SPECIES) FROM CHARACTERS GROUP BY SPECIES ORDER BY COUNT(SPECIES) DESC LIMIT 1"
 end
 
 def select_name_and_series_subgenres_of_authors
-  "Write your SQL query here"
+  "SELECT AUTHORS.NAME , SUBGENRES.NAME FROM  SERIES INNER JOIN AUTHORS ON SERIES.AUTHOR_ID = AUTHORS.ID INNER JOIN SUBGENRES ON SERIES.SUBGENRE_ID = SUBGENRES.ID "
 end
 
 def select_series_title_with_most_human_characters
-  "Write your SQL query here"
+  "SELECT SERIES.TITLE FROM SERIES INNER JOIN CHARACTERS ON SERIES.ID= CHARACTERS.SERIES_ID
+  WHERE CHARACTERS.SPECIES = 'human' GROUP BY SERIES.TITLE ORDER BY COUNT(CHARACTERS.SPECIES) DESC LIMIT 1"
 end
 
 def select_character_names_and_number_of_books_they_are_in
-  "Write your SQL query here"
+  "SELECT CHARACTERS.NAME , COUNT(BOOKS.ID) FROM CHARACTERS INNER JOIN character_books
+  ON CHARACTERS.ID = character_books.CHARACTER_ID INNER JOIN BOOKS ON BOOKS.ID =character_books.BOOK_ID
+  GROUP BY CHARACTERS.NAME ORDER BY COUNT(BOOKS.ID) DESC"
 end
